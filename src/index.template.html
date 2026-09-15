@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3eee3">
+<meta name="description" content="朝を、ほどく。公開交通量を種に、街の流れを3手で変える小さな交通パズル。">
+<title>朝を、ほどく。3D — HODOKU DIORAMA</title>
+<style>/* STYLES */
+/* STYLES3D */</style>
+</head>
+<body>
+<div class="paper-grain" aria-hidden="true"></div>
+<header class="masthead">
+ <button class="brand" id="brand" aria-label="表紙へ戻る"><svg viewBox="0 0 46 34" aria-hidden="true"><path d="M2 24C10 24 10 7 22 7s12 20 22 20M2 7c10 0 12 20 22 20S34 7 44 7" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M18 23l9-12" stroke="#f3eee3" stroke-width="7"/><path d="M18 23l9-12" stroke="currentColor" stroke-width="2.6"/></svg><span>HODOKU<small>朝を、ほどく。</small></span></button>
+ <div class="mast-center">HODOKU — A HANDHELD MORNING / 3D EDITION</div>
+ <nav class="mast-nav" aria-label="ゲームの設定"><button id="sound" aria-pressed="false" title="音を入れる">音 <span>OFF</span></button><button id="help">遊び方</button><button id="data">データと制作</button></nav>
+</header>
+<main id="shell" class="shell is-intro">
+ <section class="atlas" aria-label="街の交通シミュレーション">
+  <canvas id="map" role="img" aria-label="立体の街。ドラッグで回転、ホイールで拡大縮小。交差点の番号を押して対策を選べます。"></canvas>
+  <div class="camera-bar game-only" role="group" aria-label="3Dの視点を選ぶ"><div class="camera-tabs"><button data-view="model" aria-pressed="true" title="街の模型へ戻る（O）">模型</button><button data-view="top" aria-pressed="false" title="真上から見る（T）">俯瞰</button><button data-view="street" aria-pressed="false" title="選択した交差点を路上から（C）">路上</button><button data-view="follow" aria-pressed="false" title="一台の車を追いかける">追走</button></div><div class="camera-meta"><span id="camera-name">街の模型</span><div class="camera-zoom"><button id="zoom-out" aria-label="遠ざかる">−</button><button id="zoom-in" aria-label="近づく">＋</button><button id="view-home" aria-label="視点を初期位置に戻す" title="初期視点">↺</button></div></div></div>
+  <div class="camera-hint game-only"><span class="desktop-copy">ドラッグで回す · ホイールで寄る<br>Shift＋ドラッグで平行移動</span><span class="touch-copy">1本指で回す · 2本指で拡大・移動<br>交差点の番号をタップして設計</span></div>
+  <div id="view-message" class="view-message" role="status"></div>
+  <div class="map-heading game-only">
+   <div class="eyebrow"><span id="stage-no">SCENE 01</span><span>松本の交通量から生まれた、架空の街</span></div>
+   <h1 id="stage-name">ひと針の朝</h1>
+   <p id="stage-story"></p>
+  </div>
+  <div class="map-note game-only" id="map-note"><span class="note-cross">＋</span>交差点の番号に触れて、ほどき方を選ぶ。</div>
+  <div class="legend game-only"><span><i class="car"></i>車体色は固定</span><span><i class="bus"></i>バス</span><span><i class="person"></i>歩く人</span></div>
+  <div class="view-controls game-only"><button id="before" aria-pressed="false">原案を見る <span>↔</span></button><button id="heat" aria-pressed="false">詰まりを読む</button></div>
+  <div class="view-label game-only" id="view-label">あなたの案 / 試走</div>
+  <div id="intro" class="intro">
+   <div class="intro-kicker">A SMALL TOWN. A LITTLE MORE TIME.</div>
+   <h1>朝を、<br><em>ほどく。</em></h1>
+   <div class="intro-sub">手のひらに、街の朝。</div>
+   <p>街を回して、列を覗く。<br>信号を少し。道をひとつ。<br>三手で、誰かの朝を軽くする。</p>
+   <button id="start" class="primary intro-start">小さな街へ <span>↗</span></button>
+   <div class="intro-meta"><span>3 MOVES</span><i></i><span>限られた予算</span><i></i><span>何度でも試せる</span></div>
+   <div class="intro-source">長野県が公開する交通量を、ゲームの種に。<br><span>2021年調査 / 地図・信号・工事費は創作</span></div>
+  </div>
+  <div class="edition-tag">DIORAMA EDITION / 02.1</div>
+  <div class="intro-colophon">流れを、つくるのではなく。<br>流れる余地を、つくる。</div>
+ </section>
+ <aside class="workbench game-only" id="workbench" aria-label="対策の設計机">
+  <div class="bench-top"><div class="eyebrow">YOUR THREE STITCHES</div><h2>今日の、三手。</h2></div>
+  <div class="resources"><div><span class="meta-label">残りの手</span><div class="moves" id="moves"></div></div><div class="budget"><span class="meta-label">残り予算 <small>pt</small></span><strong id="budget">44</strong><span id="budget-total">/ 44</span></div></div>
+  <div class="budget-track"><i id="budget-fill"></i></div>
+  <div class="bench-scroll">
+  <div class="node-tabs" id="node-tabs" role="group" aria-label="交差点を選択"></div>
+  <div class="selected-title"><div><span class="eyebrow" id="node-id">JUNCTION 02</span><h3 id="node-name">工場通り</h3></div><div class="signal-dial" id="signal-dial" aria-hidden="true"><span id="signal-seconds">34</span></div></div>
+  <div class="node-readout"><span id="node-status">流れを観察中</span><span id="node-queue">待ち 0 台</span></div>
+  <button id="focus-node" class="focus-node">この交差点を、近くで見る <span>↗</span></button>
+  <div class="tool-tabs" role="tablist" aria-label="対策の種類"><button class="active" data-tool-tab="timing" role="tab" aria-selected="true">時を編む</button><button data-tool-tab="roads" role="tab" aria-selected="false">道を繕う</button></div>
+  <div id="tool-panel"></div>
+  <div class="plan-heading"><span>書き込んだ変更</span><button id="clear-plan">白紙に戻す</button></div>
+  <div id="plan-list" class="plan-list"></div>
+  </div>
+  <div class="bench-submit">
+  <div class="bench-goal" id="goal"></div>
+  <button id="run" class="primary run-button">この案で、朝を流す <span>→</span></button>
+  <div class="bench-fine">試走もやり直しも無料。予算はゲーム内の単位です。</div>
+  </div>
+ </aside>
+</main>
+<footer id="transport" class="transport hidden">
+ <div class="scenes" id="scenes" aria-label="景を選択"></div>
+ <div class="transport-center"><div class="time-label"><strong id="clock">07:00</strong><span id="mode-label">設計中</span></div><div class="timeline"><div class="timeline-rule"><i id="progress"></i></div><span id="time-start">07:00</span><span id="time-end">07:20</span></div></div>
+ <div class="play-controls"><button id="mobile-run" title="この案を採点する">試す →</button><button id="pause" aria-label="一時停止">Ⅱ</button><button id="speed">×20</button><button id="skip" class="hidden">結果まで →</button></div>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<dialog id="modal"><div id="modal-body"></div></dialog>
+<noscript><div class="no-script">このゲームを遊ぶには、ブラウザのJavaScriptを有効にしてください。</div></noscript>
+<script>/* DATA */</script>
+<script>/* ENGINE */</script>
+<script>/* RENDERER */</script>
+<script>/* RENDERER3D */</script>
+<script>/* APP */</script>
+</body>
+</html>

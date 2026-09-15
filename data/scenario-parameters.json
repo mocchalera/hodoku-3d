@@ -1,0 +1,138 @@
+{
+  "note": "These are authored game parameters, not government observations.",
+  "stages": [
+    {
+      "id": 0,
+      "no": "01",
+      "name": "ひと針の朝",
+      "caption": "MORNING / A SMALL REPAIR",
+      "hour": 7,
+      "station": 0,
+      "budget": 44,
+      "target": 18,
+      "seed": 194707,
+      "load": 1.03,
+      "peds": 1,
+      "turn": 0.34,
+      "side": [
+        0.14,
+        0.28,
+        0.4,
+        0.21,
+        0.13
+      ],
+      "story": "工場通りで、曲がる車が後ろの列を止めている。大きな道をつくる前に、ひとつの詰まりを見つけよう。",
+      "hint": "03 駅へつづく道も見てみよう。青なのに列が進まないときは「曲がり待ち」かもしれない。右折レーンで列を分け、前後の信号の拍も合わせてみよう。"
+    },
+    {
+      "id": 1,
+      "no": "02",
+      "name": "青は、ひとりのものではない",
+      "caption": "SCHOOL HOUR / SHARED TIME",
+      "hour": 8,
+      "station": 1,
+      "budget": 90,
+      "target": 22,
+      "seed": 194708,
+      "existingPockets": [
+        1,
+        3
+      ],
+      "baseGreens": {
+        "2": 64
+      },
+      "load": 1.2,
+      "peds": 2.2,
+      "turn": 0.2,
+      "side": [
+        0.18,
+        0.22,
+        0.66,
+        0.4,
+        0.16
+      ],
+      "story": "駅へ向かう人、学校へ歩く人。02 と 04 の右折レーンは整った。次は、誰かに偏った青の時間をほどこう。",
+      "hint": "03 駅へつづく道には、脇道の車と歩行者が集まる。主道の青だけを延ばすと、誰かの待ち時間が増える。"
+    },
+    {
+      "id": 2,
+      "no": "03",
+      "name": "帰り道の余白",
+      "caption": "EVENING / FIND THE RHYTHM",
+      "hour": 17,
+      "station": 2,
+      "budget": 28,
+      "target": 14,
+      "seed": 194717,
+      "existingPockets": [
+        1,
+        2,
+        3
+      ],
+      "load": 1.04,
+      "peds": 1.3,
+      "turn": 0.25,
+      "side": [
+        0.24,
+        0.27,
+        0.32,
+        0.28,
+        0.2
+      ],
+      "story": "道の改良は終わった。残るのは、時間の繕い方。青の長さと、青になる順番で、帰り道に余白をつくろう。",
+      "hint": "信号の「青の長さ」と「青になる時刻」は別のもの。連動は片方向を助けるが、反対方向にも目を向けよう。"
+    }
+  ],
+  "baseSignals": [
+    {
+      "green": 46,
+      "offset": 0
+    },
+    {
+      "green": 34,
+      "offset": 37
+    },
+    {
+      "green": 50,
+      "offset": 8
+    },
+    {
+      "green": 38,
+      "offset": 59
+    },
+    {
+      "green": 48,
+      "offset": 21
+    }
+  ],
+  "tools": {
+    "split": {
+      "name": "青の配分",
+      "cost": 4,
+      "kind": "signal"
+    },
+    "offset": {
+      "name": "信号の位相",
+      "cost": 3,
+      "kind": "signal"
+    },
+    "pocket": {
+      "name": "右折レーン",
+      "cost": 20,
+      "kind": "build"
+    },
+    "flyover": {
+      "name": "高架",
+      "cost": 70,
+      "kind": "build"
+    },
+    "sync": {
+      "name": "青の連動",
+      "cost": 14,
+      "kind": "network"
+    }
+  },
+  "sampleVehicles": 2,
+  "stepSeconds": 0.5,
+  "runSeconds": 1200
+}

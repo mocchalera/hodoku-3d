@@ -1,0 +1,13 @@
+/*
+  Cloudflare Pages headers for hodoku.mocchalera.app
+  https://developers.cloudflare.com/pages/configuration/headers/
+*/
+
+/play/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

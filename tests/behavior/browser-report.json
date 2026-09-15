@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checks": [
+    "native WebGL initialized",
+    "paused inspection",
+    "right arrow available in timing controls",
+    "right arrow costs 12 pt / one move",
+    "protected arrow actually lights in running engine",
+    "arrow has no conflicting green",
+    "rendered body colours match fixed identity",
+    "arrow undo refunds move and budget",
+    "people visibly continue on far sidewalk",
+    "unchanged design compares identically",
+    "no browser JS errors",
+    "mobile arrow control works",
+    "390px fits without overflow",
+    "no mobile JS errors"
+  ],
+  "errors": []
+}

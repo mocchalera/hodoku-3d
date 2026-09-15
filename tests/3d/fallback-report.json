@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "checks": 20,
+  "cases": [
+    "WebGL denial uses actual 2D fallback",
+    "fallback is explicitly disclosed",
+    "unsupported camera controls are not offered",
+    "fallback starts the game",
+    "fallback intervention uses original budget and moves",
+    "fallback can complete a stage without WebGL",
+    "invalid imported code cannot mutate the plan",
+    "opt-in local audio still starts",
+    "sound can be muted",
+    "keyboard junction controls remain available",
+    "keyboard pause remains available",
+    "updated help is available",
+    "help closes with Escape",
+    "stage 2 completes with agent conservation",
+    "stage 3 completes with agent conservation",
+    "right-arrow share code restores action",
+    "right-arrow-only plan wins stage 2",
+    "existing v1 plan is restored without migration",
+    "changes serialize using the compatible storage key",
+    "no uncaught JavaScript errors in fallback or compatibility paths"
+  ],
+  "errors": [],
+  "conditions": "Chromium, native 2D fallback with WebGL initialization intentionally denied; set_content; in-memory Storage seam",
+  "limitations": [
+    "Not a physical WebGL-loss or Safari test",
+    "Disk-backed Storage not tested"
+  ]
+}

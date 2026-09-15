@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "assertions": 1274276,
+  "randomValidPlans": 60,
+  "winningSolutions": [
+    {
+      "scene": "01",
+      "baselinePersonMinutes": 1590.49,
+      "solution": [
+        {
+          "type": "pocket",
+          "node": 2,
+          "value": true
+        },
+        {
+          "type": "offset",
+          "node": 4,
+          "value": 5
+        },
+        {
+          "type": "offset",
+          "node": 3,
+          "value": 40
+        }
+      ],
+      "improvementPercent": 21.74,
+      "stars": 2,
+      "budget": 26,
+      "completedBefore": 618,
+      "completedAfter": 630,
+      "pedestrianDeltaSeconds": -2.61,
+      "sideDeltaSeconds": -4.69
+    },
+    {
+      "scene": "02",
+      "baselinePersonMinutes": 3626.39,
+      "solution": [
+        {
+          "type": "pocket",
+          "node": 2,
+          "value": true
+        },
+        {
+          "type": "split",
+          "node": 2,
+          "value": 36
+        }
+      ],
+      "improvementPercent": 53.36,
+      "stars": 3,
+      "budget": 24,
+      "completedBefore": 806,
+      "completedAfter": 864,
+      "pedestrianDeltaSeconds": -52.24,
+      "sideDeltaSeconds": -65.73
+    },
+    {
+      "scene": "03",
+      "baselinePersonMinutes": 1725.98,
+      "solution": [
+        {
+          "type": "offset",
+          "node": 1,
+          "value": 10
+        },
+        {
+          "type": "split",
+          "node": 1,
+          "value": 52
+        },
+        {
+          "type": "split",
+          "node": 0,
+          "value": 64
+        }
+      ],
+      "improvementPercent": 17.75,
+      "stars": 2,
+      "budget": 11,
+      "completedBefore": 920,
+      "completedAfter": 930,
+      "pedestrianDeltaSeconds": 3.36,
+      "sideDeltaSeconds": -1.42
+    }
+  ],
+  "bridgeSolution": {
+    "plan": [
+      {
+        "type": "flyover",
+        "node": 2,
+        "value": true
+      },
+      {
+        "type": "split",
+        "node": 2,
+        "value": 24
+      }
+    ],
+    "improvementPercent": 55.87,
+    "stars": 2,
+    "cost": 74
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checks": 3713848,
+  "redStops": 364536,
+  "rightWaiting": 16585,
+  "clears": 2694,
+  "pedLeaving": 67379
+}
