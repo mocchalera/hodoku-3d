@@ -1,0 +1,15 @@
+(()=>{'use strict';
+const $=s=>document.querySelector(s),hero=$('#hero-video'),toggle=$('#motion-toggle'),dialog=$('#film-dialog'),trailer=$('#trailer'),reduce=matchMedia('(prefers-reduced-motion: reduce)'),saveData=navigator.connection?.saveData;let userPaused=false,lastFocus;
+function load(v){const s=v.querySelector('source');if(s.dataset.src){s.src=s.dataset.src;delete s.dataset.src;v.load();}}
+function heroState(){toggle.textContent=hero.paused?'再生':'停止';toggle.setAttribute('aria-pressed',String(!hero.paused));toggle.setAttribute('aria-label',hero.paused?'背景動画を再生':'背景動画を停止');}
+async function playHero(){load(hero);try{await hero.play();}catch(_){}heroState();}
+if(!reduce.matches&&!saveData){new IntersectionObserver(es=>{for(const e of es){if(e.isIntersecting&&!userPaused&&!dialog.open)playHero();else hero.pause();heroState();}},{threshold:.15}).observe(hero);}
+toggle.addEventListener('click',()=>{if(hero.paused){userPaused=false;playHero();}else{userPaused=true;hero.pause();heroState();}});hero.addEventListener('pause',heroState);hero.addEventListener('play',heroState);
+document.querySelectorAll('[data-open-film]').forEach(b=>b.addEventListener('click',async()=>{lastFocus=b;hero.pause();load(trailer);dialog.showModal();document.body.style.overflow='hidden';try{await trailer.play();}catch(_){}}));
+function close(){trailer.pause();dialog.close();}$('#close-film').addEventListener('click',close);dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close();}});dialog.addEventListener('close',()=>{trailer.pause();document.body.style.overflow='';lastFocus?.focus();});
+$('#comparison').addEventListener('input',e=>{const v=Number(e.target.value);$('.compare-stage').style.setProperty('--split',v+'%');e.target.setAttribute('aria-valuetext',`原案${v}%、変更案${100-v}%`);});
+const shareText='この街の渋滞、あなたなら3手でどう解く？\n信号の時間を変える。右折待ちをほどく。道を空へ逃がす。\n3D交通パズル「朝を、ほどく。」 #HODOKU';
+$('#share').addEventListener('click',async()=>{const status=$('#share-status'),online=/^https?:$/.test(location.protocol),url=online?location.href.split('#')[0]:null;if(!online){status.textContent='公開後はこのボタンからLPを共有できます。今は完成したPVファイルをSNSへ投稿できます。';return;}try{if(navigator.share){await navigator.share({title:'朝を、ほどく。 — HODOKU',text:shareText,url});}else if(navigator.clipboard){await navigator.clipboard.writeText(shareText+'\n'+url);status.textContent='紹介文とURLをコピーしました。';}else{window.open('https://x.com/intent/post?text='+encodeURIComponent(shareText)+'&url='+encodeURIComponent(url),'_blank','noopener,noreferrer');}}catch(e){if(e.name!=='AbortError')status.textContent='共有できませんでした。アドレスバーのURLをコピーしてください。';}});
+// Content stays visible without JavaScript. Reduced motion respects the OS setting.
+if(!reduce.matches&&'IntersectionObserver'in window){const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}}),{threshold:.08});document.querySelectorAll('.tool-story,.people-grid,.stage-list article').forEach(e=>{e.classList.add('reveal');observer.observe(e);});}
+})();

@@ -1,319 +1,56 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#ece8dc" />
-    <meta
-      name="description"
-      content="朝を、ほどく。3D — 手のひらの街を、三手でほどく交通パズル。公開交通量を種に、信号と道の配り方を繕う小さなゲーム。"
-    />
-    <link rel="canonical" href="https://hodoku.mocchalera.app/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="朝を、ほどく。3D — HODOKU DIORAMA" />
-    <meta
-      property="og:title"
-      content="朝を、ほどく。3D — 手のひらの街を、三手でほどく。"
-    />
-    <meta
-      property="og:description"
-      content="3ステージの街を本物の3Dジオラマにした交通パズル。回して、覗いて、三手で流れを変える。"
-    />
-    <meta property="og:url" content="https://hodoku.mocchalera.app/" />
-    <title>朝を、ほどく。3D — HODOKU DIORAMA</title>
-    <style>
-      :root {
-        --paper: #ece8dc;
-        --paper2: #f4f0e7;
-        --ink: #2b443b;
-        --muted: #6d7c6b;
-        --line: #c6cbb9;
-        --green: #526f5e;
-        --accent: #b96347;
-        --serif:
-          "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", Georgia,
-          serif;
-        --sans:
-          "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans CJK JP",
-          sans-serif;
-        --mono: "SFMono-Regular", Consolas, monospace;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        background: var(--paper);
-        color: var(--ink);
-        font-family: var(--sans);
-        font-size: 14px;
-        line-height: 2;
-        -webkit-font-smoothing: antialiased;
-      }
-      a {
-        color: var(--green);
-        text-underline-offset: 3px;
-      }
-      .wrap {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-      .masthead {
-        border-bottom: 1px solid var(--line);
-        background: var(--paper2);
-      }
-      .masthead .wrap {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 64px;
-      }
-      .brand {
-        font: 600 16px var(--mono);
-        letter-spacing: 0.14em;
-        text-decoration: none;
-        color: var(--ink);
-      }
-      .brand small {
-        display: block;
-        font: 10px var(--serif);
-        letter-spacing: 0.26em;
-        color: var(--muted);
-      }
-      .mast-nav {
-        display: flex;
-        gap: 20px;
-        font-size: 12px;
-      }
-      .hero {
-        padding: 72px 0 56px;
-      }
-      .kicker {
-        font: 10px var(--mono);
-        letter-spacing: 0.18em;
-        color: var(--green);
-      }
-      .hero h1 {
-        font-family: var(--serif);
-        font-weight: 400;
-        font-size: clamp(44px, 8vw, 84px);
-        line-height: 1.3;
-        letter-spacing: 0.06em;
-        margin: 18px 0 8px;
-      }
-      .hero h1 em {
-        font-style: normal;
-      }
-      .sub {
-        font-family: var(--serif);
-        letter-spacing: 0.1em;
-        font-size: 16px;
-        margin: 0 0 16px;
-      }
-      .lead {
-        color: var(--muted);
-        font-size: 13px;
-        max-width: 560px;
-        margin: 0 0 28px;
-      }
-      .cta-row {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-      .btn {
-        display: inline-block;
-        text-decoration: none;
-        border: 1px solid var(--ink);
-        padding: 14px 28px;
-        font-size: 14px;
-        letter-spacing: 0.06em;
-        min-height: 52px;
-        line-height: 1.6;
-      }
-      .btn.primary {
-        background: var(--ink);
-        color: var(--paper);
-      }
-      .btn.ghost {
-        background: transparent;
-        color: var(--ink);
-      }
-      .meta {
-        display: flex;
-        gap: 14px;
-        font: 10px var(--mono);
-        letter-spacing: 0.12em;
-        color: var(--muted);
-        margin-top: 22px;
-      }
-      .notice {
-        border: 1px solid var(--line);
-        background: var(--paper2);
-        padding: 16px 18px;
-        font-size: 12px;
-        color: var(--muted);
-        margin: 32px 0 0;
-      }
-      .notice strong {
-        color: var(--ink);
-      }
-      section.block {
-        padding: 40px 0;
-        border-top: 1px solid var(--line);
-      }
-      section.block h2 {
-        font-family: var(--serif);
-        font-weight: 400;
-        font-size: 24px;
-        letter-spacing: 0.08em;
-        margin: 0 0 10px;
-      }
-      section.block p {
-        margin: 0 0 12px;
-        color: var(--muted);
-        font-size: 13px;
-        max-width: 620px;
-      }
-      .placeholder {
-        border: 1px dashed #a3b19a;
-        padding: 22px;
-        font: 11px var(--mono);
-        letter-spacing: 0.06em;
-        color: var(--muted);
-        background: #ece8dc;
-      }
-      footer {
-        border-top: 1px solid var(--line);
-        padding: 28px 0 48px;
-        font-size: 11px;
-        color: var(--muted);
-      }
-      footer .wrap {
-        display: grid;
-        gap: 8px;
-      }
-      @media (max-width: 600px) {
-        .hero {
-          padding: 52px 0 40px;
-        }
-        .mast-nav {
-          gap: 14px;
-          font-size: 11px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="masthead">
-      <div class="wrap">
-        <a class="brand" href="/">HODOKU<small>朝を、ほどく。</small></a>
-        <nav class="mast-nav" aria-label="サイト内導線">
-          <a href="/play/">ゲームを遊ぶ</a>
-          <a href="#pv">PV</a>
-          <a href="#howto">遊び方</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="wrap">
-      <div class="hero" id="hero">
-        <div class="kicker">
-          A SMALL TOWN. A LITTLE MORE TIME. / DIORAMA EDITION 02.1
-        </div>
-        <h1>朝を、<em>ほどく。</em></h1>
-        <p class="sub">手のひらに、街の朝。</p>
-        <p class="lead">
-          街を回して、列を覗く。信号を少し。道をひとつ。三手で、誰かの朝を軽くする交通パズル。公開交通量を種に、3つの景を3Dジオラマで。
-        </p>
-        <div class="cta-row">
-          <a class="btn primary" href="/play/">ゲームを遊ぶ →</a>
-          <a class="btn ghost" href="/play/#howto">遊び方を見る</a>
-        </div>
-        <div class="meta">
-          <span>3 MOVES</span><span>限られた予算</span
-          ><span>何度でも試せる</span>
-        </div>
-        <p class="notice">
-          <strong>このページはLPプレースホルダーです。</strong><br />
-          この後、別エージェントが本格LPとPVをここ（
-          <code>/</code> ）に実装します。ゲーム本体は
-          <a href="/play/">/play/</a>
-          に配置済みで、このページからの導線（「ゲームを遊ぶ」ボタン）は確保済みです。
-        </p>
-      </div>
-
-      <!-- LP-PLACEHOLDER: 別エージェントがここに本格LPとPVを実装する -->
-      <!-- 予定セクション: #features（3つの景の紹介） / #pv（プロモ映像） / #howto（遊び方） / #cta（プレイ誘導） -->
-      <section class="block" id="features">
-        <h2>三つの景</h2>
-        <p>
-          01 ひと針の朝 / 02 青は、ひとりのものではない / 03
-          帰り道の余白。詳細は本格LPで紹介します。
-        </p>
-        <div class="placeholder">
-          SECTION PLACEHOLDER: #features —
-          別エージェントが実装（景紹介・スクリーンショット・予算/目標の一覧）
-        </div>
-      </section>
-
-      <section class="block" id="pv">
-        <h2>PV</h2>
-        <p>
-          プロモーション映像は近日公開。まずはゲームで朝を触ってみてください。
-        </p>
-        <div class="placeholder">
-          SECTION PLACEHOLDER: #pv —
-          別エージェントが実装（動画埋め込み・サムネイル）
-        </div>
-        <p style="margin-top: 16px">
-          <a class="btn ghost" href="/play/">先に遊んでみる →</a>
-        </p>
-      </section>
-
-      <section class="block" id="howto">
-        <h2>遊び方（概要）</h2>
-        <p>
-          「最初の朝へ」→ 交差点を選ぶ →
-          「時を編む」「道を繕う」で変更を書き込む →
-          「この案で、朝を流す」。変更の取り消しと再試行は無料です。
-        </p>
-        <div class="placeholder">
-          SECTION PLACEHOLDER: #howto —
-          別エージェントが実装（操作ガイド・対応環境・FAQ）
-        </div>
-      </section>
-
-      <section class="block" id="cta">
-        <h2>さあ、最初の朝へ。</h2>
-        <p>ビルド・サーバー・アカウント不要。ブラウザでそのまま遊べます。</p>
-        <div class="cta-row">
-          <a class="btn primary" href="/play/">小さな街へ ↗</a>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="wrap">
-        <span
-          >HODOKU DIORAMA 2.1 /
-          ローカル完結・外部ライブラリなし・トラッキングなし</span
-        >
-        <span
-          >交通量の出典：国土交通省道路局・長野県「令和3年度
-          全国道路・街路交通情勢調査
-          一般交通量調査」（長野県公開・2024年9月訂正版）。地図・信号・工事費は創作です。</span
-        >
-        <span
-          ><a href="/play/">ゲームを遊ぶ</a> ·
-          ゲーム内「データと制作」に出典の詳細があります。</span
-        >
-      </div>
-    </footer>
-  </body>
-</html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3eee3">
+<title>朝を、ほどく。 — HODOKU｜3手で街を変える3D交通パズル</title>
+<meta name="description" content="信号を編む。曲がり待ちをほどく。道を空へ逃がす。限られた予算と3つの変更で、街の朝を変える3D交通パズル『朝を、ほどく。』。インストール不要、ブラウザでプレイ。">
+<meta property="og:type" content="website"><meta property="og:locale" content="ja_JP"><meta property="og:site_name" content="HODOKU — 朝を、ほどく。">
+<meta property="og:title" content="この街の渋滞、あなたなら3手でどう解く？｜朝を、ほどく。">
+<meta property="og:description" content="信号の時間を変える？ 右折の列を分ける？ 高架に予算を使う？ 手のひらの街をほどく、3D交通パズル。ブラウザでプレイ。">
+<meta property="og:image" content="https://hodoku.mocchalera.app/assets/ogp.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="朝を、ほどく。 3手で街を変える3D交通パズル。実際のゲームのジオラマ。">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="朝を、ほどく。｜渋滞を、3手でほどけ。"><meta name="twitter:description" content="道路を増やす前に、時間をほどく。限られた予算で街の朝を変える3D交通パズル。"><meta name="twitter:image" content="https://hodoku.mocchalera.app/assets/ogp.jpg">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="canonical" href="https://hodoku.mocchalera.app/">
+<meta property="og:url" content="https://hodoku.mocchalera.app/">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="nav"><a class="wordmark" href="#" aria-label="朝を、ほどく。トップ"><svg viewBox="0 0 48 40" aria-hidden="true"><path d="M3 29h12c12 0 10-21 22-21h8M3 20h11c14 0 10 13 23 13h8"/><circle cx="24" cy="21" r="3"/></svg><span>HODOKU<small>朝を、ほどく。</small></span></a><nav aria-label="メイン"><a href="#playbook">遊び方</a><a href="#film">予告篇</a><a class="nav-play" href="play/index.html">街へ <span>↗</span></a></nav></header>
+<main id="main">
+<section class="hero" aria-labelledby="hero-title">
+ <div class="hero-visual"><video id="hero-video" class="hero-video" poster="assets/orbit.webp" muted loop playsinline preload="none" aria-label="実際のゲームから撮影した、車が行き交う3Dの街"><source data-src="assets/hero-loop.mp4" type="video/mp4"></video><div class="hero-wash"></div></div>
+ <div class="hero-copy"><p class="eyebrow">A SMALL TRAFFIC PUZZLE <span> / </span> 3D</p><h1 id="hero-title">朝を、<br><em>ほどく。</em></h1><p class="hero-lead">道路を増やす前に、<br>時間をほどく。</p><p class="hero-description">限られた予算と、たった3つの変更。<br>あなたの一手で、街が動きだす。</p><a class="button play-link" href="play/index.html">ブラウザで、ひと針。<span>↗</span></a><div class="hero-meta">インストール不要 <i></i> ひとり用 <i></i> 全3ステージ</div></div>
+ <div class="hero-foot"><span>SCROLL TO UNTANGLE <b>↓</b></span><span class="real-note">実際のゲーム画面 / HODOKU 3D v2.1 <button id="motion-toggle" aria-pressed="false" aria-label="背景動画を再生">再生</button></span></div>
+ <div class="hero-note" aria-hidden="true"><span>街には、<br>解き方がある。</span><i></i></div>
+</section>
+<div class="manifesto"><span>THREE MOVES.</span><span>ONE DIFFERENT MORNING.</span><span>3手で、違う朝へ。</span></div>
+<section id="film" class="film-section section-dark">
+ <div class="section-heading wrap"><div><p class="eyebrow">01 <span>/</span> THE PREMISE</p><h2>渋滞を、<br><em>3手でほどけ。</em></h2></div><div class="section-intro"><p>ここにあるのは、もう完成した街。<br>足りないのは、ほんの少しの工夫です。</p><p>青信号を長くしたら、別の道が詰まる。<br>高架をかけても、その先が動かない。<br>正解は、大きな工事とは限りません。</p></div></div>
+ <div class="film-frame wrap"><button class="film-poster" data-open-film aria-label="予告篇を再生、42秒、音声あり"><img src="assets/film-poster.webp" width="1920" height="1080" alt="交差点へ近づいた実際のゲーム画面" loading="lazy"><span class="play-round"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></span><span class="film-caption"><span>朝を、ほどく。<small>OFFICIAL GAMEPLAY TRAILER</small></span><span>00:42 <b>↗</b></span></span></button><div class="film-bottom"><span>映像はゲーム内から収録。カメラ・字幕・速度調整・編集を加えています。</span><span>SOUND ON / 字幕付き</span></div></div>
+</section>
+<section id="playbook" class="playbook wrap">
+ <div class="section-heading"><div><p class="eyebrow">02 <span>/</span> THREE WAYS TO UNTANGLE</p><h2>小さく変えて、<br>大きく流す。</h2></div><p class="section-intro">信号の拍を合わせるか。<br>曲がる車の居場所をつくるか。<br>限られた予算を、どこへ使う？</p></div>
+ <div class="tool-stories">
+ <article class="tool-story"><div class="tool-image"><img src="assets/ui.webp" width="1920" height="1080" alt="信号の時間を調整する実際の操作画面" loading="lazy"><span class="tool-number">01</span></div><div class="tool-copy"><p class="eyebrow">TIMING <span> / </span> 3–14 PT</p><h3>青の時間を、編む。</h3><p>長さを変える。開始をずらす。連動させる。<br>列が着くころに、次の信号が青になる。</p><span class="stitch-label">信号の配分・位相・連動</span></div></article>
+ <article class="tool-story reverse"><div class="tool-image"><img src="assets/arrow.webp" width="1920" height="1080" alt="右折専用信号を追加した交差点のゲーム画面" loading="lazy"><span class="tool-number">02</span></div><div class="tool-copy"><p class="eyebrow">TURNING <span> / </span> 12 OR 20 PT</p><h3>曲がり待ちを、ほどく。</h3><p>一台の右折待ちが、後ろの列を止めている。<br>矢印信号や専用レーンで、その結び目を解く。</p><span class="stitch-label">右折専用信号・右折レーン</span></div></article>
+ <article class="tool-story"><div class="tool-image"><img src="assets/bridge.webp" width="1920" height="1080" alt="直進車がスロープを上り、高架と地上で道を分けた実際のゲーム画面" loading="lazy"><span class="tool-number">03</span></div><div class="tool-copy"><p class="eyebrow">STRUCTURE <span> / </span> 70 PT</p><h3>道を、空へ逃がす。</h3><p>直進は上へ。曲がる車は地上へ。<br>思い切った一手。ただし、その先まで見渡そう。</p><span class="stitch-label">高架化 / 第2景で選択可能</span></div></article>
+ </div>
+</section>
+<section class="comparison section-dark" id="compare">
+ <div class="wrap"><div class="section-heading"><div><p class="eyebrow">03 <span>/</span> THE SAME MORNING, REWRITTEN</p><h2>同じ街。<br>違う、流れ。</h2></div><p class="section-intro">同じ車。同じ経路。同じ発車時刻。<br>変わるのは、あなたの設計だけ。<br><span class="small">スライダーを動かして、原案と変更案を比較。</span></p></div>
+ <div class="compare-stage" style="--split:50%"><img src="assets/after.webp" width="1920" height="1080" alt="変更後：高架化と信号配分を変更した同時刻の街" loading="lazy"><div class="compare-before"><img src="assets/before.webp" width="1920" height="1080" alt="原案：同じ交通需要、同じ時刻の街" loading="lazy"></div><div class="compare-line"><span>↔</span></div><span class="compare-label before">BEFORE / 原案</span><span class="compare-label after">AFTER / あなたの一手</span><input id="comparison" type="range" min="0" max="100" value="50" aria-label="原案と変更案の比較表示の境界" aria-valuetext="原案50%、変更案50%"></div>
+ <div class="comparison-stats"><div><span class="stat-label">街全体の待ち時間</span><strong>−55.9<span>%</span></strong></div><p>第2景のプレイ結果の一例。<br><b>2手・74pt</b>で、朝の結び目をほどいた。</p><small>高架化＋信号配分の変更。v2.1の同一需要による試走結果。<br>効果は設計・ステージで異なります。実際の道路の予測値ではありません。</small></div></div>
+</section>
+<section class="people-section wrap"><p class="eyebrow">04 <span>/</span> NOT JUST CARS</p><div class="people-grid"><div class="people-copy"><h2>車だけの、<br>街じゃない。</h2><p>横断歩道で待つ人。<br>脇道から出たい車。<br>バスで、どこかへ向かう人。</p><p>一つの道を流すために、<br>誰かを待たせすぎていないだろうか。</p><p class="people-closing">ほどくのは、渋滞。<br>取り戻すのは、みんなの時間。</p></div><figure><img src="assets/people.webp" width="1920" height="1080" alt="歩道から横断歩道を渡る人と車を、路上近くで観察した実際のプレイ画面" loading="lazy"><figcaption>自由な視点で、街に寄り添う。<span>DIORAMA / CLOSE OBSERVATION</span></figcaption></figure></div></section>
+<section class="stages wrap"><div class="stage-top"><p class="eyebrow">THREE CHAPTERS</p><h2>三つの街角、<br class="mobile-only">三つの問い。</h2></div><div class="stage-list"><article><span class="stage-no">01</span><div><small>07:00 / MORNING</small><h3>ひと針の朝</h3><p>青なのに、動かない。その理由を見つける朝。</p></div><span class="stage-cost">44<span>PT</span></span></article><article><span class="stage-no">02</span><div><small>08:00 / SCHOOL HOUR</small><h3>青は、ひとりのものではない</h3><p>車と歩行者へ、限られた時間を配り直す。</p></div><span class="stage-cost">90<span>PT</span></span></article><article><span class="stage-no">03</span><div><small>17:00 / EVENING</small><h3>帰り道の余白</h3><p>道は整った。残るのは、信号のリズム。</p></div><span class="stage-cost">28<span>PT</span></span></article></div></section>
+<section class="closing"><svg class="closing-thread" viewBox="0 0 1400 400" fill="none" aria-hidden="true"><path d="M-40 290H340C440 290 400 100 530 100S600 330 780 330 880 120 1030 120H1440"/><path d="M-40 310H350C470 310 420 120 530 120S610 350 780 350 880 140 1030 140H1440"/></svg><div class="closing-copy"><p class="eyebrow">YOUR FIRST STITCH</p><h2>その一手で、<br>街が動きだす。</h2><a class="button play-link" href="play/index.html">この朝を、ほどきにいく。<span>↗</span></a><p>3手以内。取り消しも、試走も、何度でも。</p><button id="share" class="share-link">この街を、誰かに渡す。<span>↗</span></button><span class="share-status" id="share-status" role="status"></span></div></section>
+<section class="colophon wrap"><div class="colophon-title"><p class="eyebrow">A NOTE ON THIS TOWN</p><h3>実測から生まれた、<br>架空の街。</h3></div><div><p>交通量の種は、国土交通省・長野県が公開する2021年度の道路交通調査。<br>松本の宮田・鎌田・渚の観測値から、3つのステージが生まれました。</p><p>地形・建物・道路配置・歩行者数・工事費と効果はゲーム用の創作です。<br>実在する街の再現や、実際の交通政策の効果予測ではありません。</p><a href="https://www.pref.nagano.lg.jp/michiken/infra/doro/chosa/r3census.html" target="_blank" rel="noopener noreferrer">交通量データの出典を読む ↗</a><details><summary>プレイ環境・操作について</summary><p>PCではドラッグで回転、ホイールで拡大・縮小。タッチでは1本指で回転、2本指で拡大・移動。音はゲーム内でONにできます。WebGL対応ブラウザ向け。非対応環境では2D表示に切り替わります。スマートフォンでも操作できますが、快適な観察にはPCの画面を推奨します。</p></details></div></section>
+</main>
+<footer class="footer"><a href="#" class="footer-brand">HODOKU<span>朝を、ほどく。</span></a><span>GAME & DIRECTION / TAKUMA SAKAMOTO</span><span>A SMALL REPAIR, A DIFFERENT MORNING.</span></footer>
+<dialog id="film-dialog" aria-labelledby="film-title"><div class="dialog-head"><h2 id="film-title">朝を、ほどく。<span>OFFICIAL TRAILER / 00:42</span></h2><button id="close-film" aria-label="予告篇を閉じる">閉じる ×</button></div><video id="trailer" controls playsinline preload="none" poster="assets/film-poster.webp"><source data-src="assets/hodoku-pv-42s.mp4" type="video/mp4"><track kind="captions" srclang="ja" label="日本語" src="assets/captions-ja.vtt"></video><p class="dialog-note">字幕は映像内に収録しています。映像は実際のゲームから撮影。</p></dialog>
+<script src="assets/site.js"></script>
+</body></html>
