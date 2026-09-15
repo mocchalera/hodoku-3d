@@ -37,13 +37,17 @@ npx -y wrangler@latest login
 npx -y wrangler@latest pages deploy ./public --project-name hodoku-3d
 ```
 
-初回デプロイ後にカスタムドメインを追加:
+初回デプロイ後にカスタムドメインを追加（wrangler に `pages domain` コマンドは無いため API で追加。
+ダッシュボード → Pages → `hodoku-3d` → Custom domains からでも可）:
 
 ```sh
-npx -y wrangler@latest pages domain add hodoku.mocchalera.app --project-name hodoku-3d
+TOKEN=$(grep -o 'oauth_token *= *"[^"]*"' ~/.wrangler/config/default.toml | cut -d'"' -f2)
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/pages/projects/hodoku-3d/domains" \
+  -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
+  --data '{"name":"hodoku.mocchalera.app"}'
 ```
 
-`hodoku.mocchalera.app` が有効化されると、Cloudflare が自動で DNS（CNAME）を設定します。
+`hodoku.mocchalera.app` が有効化されると、同一アカウントのゾーンには Cloudflare が自動で DNS を設定します。
 
 ## 方法B: GitHub 連携で自動デプロイ（LP継続開発用・推奨）
 
